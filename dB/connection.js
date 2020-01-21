@@ -1,8 +1,6 @@
 const Sequelize = require('sequelize');
 const { dB: { db_host, db_user, db_pass, db_name, db_dialect } } = require('../config/env');
 
-let dB = {}
-
 //Setting up the DBconfig
 const sequelize = new Sequelize(db_name, db_user, db_pass, {
     host: db_host,
@@ -20,16 +18,22 @@ sequelize
     });
 
 
-sequelize.sync()
+sequelize.sync({
+    logging: console.log
+}).then(() => {
+    console.log('connection to database established successfully');
+}).catch(err => {
+    console.log('Unable to connect to database', err);
+})
 
 // sequelize.sync({
 //     force:false
 // });
 
-dB.sequelize = sequelize;
-dB.Sequelize = Sequelize;
 
-
-module.exports = dB;
+module.exports = {
+    sequelize,
+    Sequelize
+};
 
 

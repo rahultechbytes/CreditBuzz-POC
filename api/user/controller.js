@@ -28,7 +28,7 @@ module.exports.deleteUser = (req, res) => {
             id: req.query.id
         }
     }).then((data) => {
-        res.send("User data deleted")
+        res.send("User data deleted", data)
     }).catch((err) => {
         console.log("error while deleting", err);
         res.json("error", err)
