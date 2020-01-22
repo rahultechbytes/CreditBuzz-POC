@@ -1,7 +1,31 @@
 const User = require('./model');
 
 module.exports.signIn = (req, res) => {
-    res.send("signIn User")
+    User.findOne({
+        where: {
+            emailId: req.body.emailId,
+            password: req.body.password
+        }
+    }).then(data => {
+        if (data == null) {
+            res.json({
+                message: 'user not found',
+                status: 404
+            })
+        } else {
+            res.json({
+                message: 'user authenticated',
+                status: 200,
+                data: data
+            })
+        }
+    }).catch(err => {
+        res.json({
+            message: 'error while authentication',
+            status: 404,
+            error: err
+        })
+    })
 }
 
 module.exports.signUp = (req, res) => {
