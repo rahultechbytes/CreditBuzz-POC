@@ -13,7 +13,6 @@ module.exports.signUp = (req, res) => {
 
 module.exports.updateUser = (req, res) => {
     const id = req.query.id;
-    console.log(req.query)
     User.update(req.query, {
         where: {
             id: id
