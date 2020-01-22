@@ -2,6 +2,7 @@ const Posts = require('./model');
 
 module.exports.getAllPost = (req, res) => {
     Posts.findAll({
+        limit: 10,
         where: {
             UserId: req.query.UserId
         }
@@ -40,11 +41,11 @@ module.exports.deletePost = (req, res) => {
     }).then((data) => {
         console.log(">>>>>>", data)
         res.json({
-            status:200,
+            status: 200,
             data: data
         })
     }).catch((err) => {
         res.status(404
-            ).send("error", err)
+        ).send("error", err)
     })
 }
