@@ -19,7 +19,8 @@ sequelize
 
 
 sequelize.sync({
-    logging: console.log
+    logging: console.log,
+    force: true
 }).then(() => {
     console.log('connection to database established successfully');
 }).catch(err => {

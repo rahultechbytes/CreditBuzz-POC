@@ -1,4 +1,4 @@
-const UserModel = require('./model');
+const User = require('./model');
 
 module.exports.signIn = (req, res) => {
     res.send("signIn User")
@@ -6,7 +6,7 @@ module.exports.signIn = (req, res) => {
 
 module.exports.signUp = (req, res) => {
     const userData = req.body;
-    UserModel.create(userData).then(data => {
+    User.create(userData).then(data => {
         res.json(data)
     }).catch((err) => console.log(err));
 }
@@ -14,7 +14,7 @@ module.exports.signUp = (req, res) => {
 module.exports.updateUser = (req, res) => {
     const id = req.query.id;
     console.log(req.query)
-    UserModel.update(req.query, {
+    User.update(req.query, {
         where: {
             id: id
         }
@@ -23,7 +23,7 @@ module.exports.updateUser = (req, res) => {
     }).catch(err => console.log("error while updating", err));
 }
 module.exports.deleteUser = (req, res) => {
-    UserModel.destroy({
+    User.destroy({
         where: {
             id: req.query.id
         }

@@ -1,6 +1,7 @@
 const { sequelize, Sequelize } = require('../../dB/connection');
+const Post = require('../post/model');
 
-const UserModel = sequelize.define('User', {
+const User = sequelize.define('User', {
     id: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV1,
@@ -9,7 +10,10 @@ const UserModel = sequelize.define('User', {
     },
     emailId: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        validate:{
+            isEmail: true,            // checks for email format (foo@bar.com)
+        }
     },
     firstName: {
         type: Sequelize.STRING,
@@ -32,4 +36,6 @@ const UserModel = sequelize.define('User', {
     updatedAt: Sequelize.DATE
 });
 
-module.exports = UserModel;
+User.hasMany(Post)
+
+module.exports = User;
